@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Надвор\'е</string>
+
+    <!-- Titles -->
+    <string name="home_title">Галоўная</string>
+    <string name="details_title">Падрабязнасці</string>
+    <string name="settings_title">Налады</string>
+
+    <!-- Buttons -->
+    <string name="details_button">Падрабязнасці</string>
+    <string name="settings_button">Налады</string>
+
+    <!-- Preferences -->
+    <string name="localization_category_title">Мовы і лакалізацыя</string>
+    <string name="language_preference_title">Мова</string>
+    <string name="language_preference_dialog_title">Выберыце мову</string>
+
+    <string name="theme_category_title">Знешні выгляд</string>
+    <string name="theme_preference_title">Каляровая тэма</string>
+    <string name="theme_preference_dialog_title">Выберыце тэму</string>
+
+    <!-- Language entries -->
+    <string name="language_russian">Руская</string>
+    <string name="language_english">Англійская</string>
+    <string name="language_belarusian">Беларуская</string>
+    <string name="language_system">Сістэмная</string>
+
+    <!-- Theme entries -->
+    <string name="theme_light">Светлая</string>
+    <string name="theme_dark">Цёмная</string>
+    <string name="theme_system">Сістэмная</string>
+</resources>

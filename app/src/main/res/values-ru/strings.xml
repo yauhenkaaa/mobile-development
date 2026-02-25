@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Погода</string>
+
+    <!-- Titles -->
+    <string name="home_title">Главная</string>
+    <string name="details_title">Подробности</string>
+    <string name="settings_title">Настройки</string>
+
+    <!-- Buttons -->
+    <string name="details_button">Подробности</string>
+    <string name="settings_button">Настройки</string>
+
+    <!-- Preferences -->
+    <string name="localization_category_title">Языки и локализация</string>
+    <string name="language_preference_title">Язык</string>
+    <string name="language_preference_dialog_title">Выберите язык</string>
+
+    <string name="theme_category_title">Оформление</string>
+    <string name="theme_preference_title">Цветовая тема</string>
+    <string name="theme_preference_dialog_title">Выберите тему</string>
+
+    <!-- Language entries -->
+    <string name="language_russian">Русский</string>
+    <string name="language_english">Английский</string>
+    <string name="language_belarusian">Белорусский</string>
+    <string name="language_system">Системный</string>
+
+    <!-- Theme entries -->
+    <string name="theme_light">Светлая</string>
+    <string name="theme_dark">Тёмная</string>
+    <string name="theme_system">Системная</string>
+
+</resources>

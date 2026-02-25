@@ -1,8 +1,13 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.MyWeather" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:windowBackground">@color/bg_color</item>
+        <item name="android:textColorPrimary">@color/text_color</item>
+    </style>
+
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenAnimatedIcon">@drawable/myweather_logo</item>
+        <item name="postSplashScreenTheme">@style/Theme.MyWeather</item>
     </style>
 
     <style name="Theme.MyWeather" parent="Base.Theme.MyWeather" />
