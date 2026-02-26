@@ -13,6 +13,8 @@
     <string name="settings_button">Налады</string>
     <string name="save_button">Захаваць</string>
     <string name="add_record_button">Дадаць запіс</string>
+    <string name="edit_button">Змяніць</string>
+    <string name="set_as_main_button">Зрабіць галоўным</string>
 
     <!-- Hints -->
     <string name="title_hint">Загаловак</string>
@@ -44,4 +46,5 @@
     <string name="weather_state_hint">Стан надвор\'я</string>
     <string name="delete_button">Выдаліць</string>
     <string name="search_hint">Пошук горада...</string>
+    <string name="no_main_city">Галоўны горад не вызначаны</string>
 </resources>

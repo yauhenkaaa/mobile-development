@@ -13,6 +13,7 @@
     <string name="save_button">Save</string>
     <string name="add_record_button">Add Record</string>
     <string name="edit_button">Edit</string>
+    <string name="set_as_main_button">Set as Main</string>
 
     <!-- Hints -->
     <string name="title_hint">Title</string>
@@ -44,5 +45,6 @@
     <string name="weather_state_hint">Weather State</string>
     <string name="delete_button">Delete</string>
     <string name="search_hint">Search city...</string>
+    <string name="no_main_city">No main city selected</string>
 
 </resources>

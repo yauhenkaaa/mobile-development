@@ -28,6 +28,10 @@ class CityViewModel(private val dao: CityDao) : ViewModel() {
         }
         .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
 
+    val mainCity: StateFlow<City?> = dao.getMainCity()
+        .stateIn(viewModelScope, SharingStarted.Lazily, null)
+
+    fun setMainCity(city: City) = viewModelScope.launch { dao.setMainCity(city.id) }
     fun insertCity(city: City) = viewModelScope.launch { dao.insertCity(city) }
     fun updateCity(city: City) = viewModelScope.launch { dao.updateCity(city) }
     fun deleteCity(city: City) = viewModelScope.launch { dao.deleteCity(city) }

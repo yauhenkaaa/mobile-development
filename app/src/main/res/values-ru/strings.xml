@@ -13,6 +13,7 @@
     <string name="save_button">Сохранить</string>
     <string name="add_record_button">Добавить запись</string>
     <string name="edit_button">Изменить</string>
+    <string name="set_as_main_button">Сделать главным</string>
 
     <!-- Hints -->
     <string name="title_hint">Заголовок</string>
@@ -44,4 +45,5 @@
     <string name="weather_state_hint">Состояние погоды</string>
     <string name="delete_button">Удалить</string>
     <string name="search_hint">Поиск города...</string>
+    <string name="no_main_city">Главный город не выбран</string>
 </resources>
