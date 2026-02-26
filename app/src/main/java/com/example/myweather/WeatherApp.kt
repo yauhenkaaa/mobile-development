@@ -3,8 +3,11 @@ package com.example.myweather
 import android.app.Application
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceManager
+import com.example.myweather.data.AppDatabase
 
 class WeatherApp : Application() {
+
+    val database by lazy { AppDatabase.getDatabase(this) }
 
     override fun onCreate() {
         super.onCreate()

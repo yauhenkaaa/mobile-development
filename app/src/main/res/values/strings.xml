@@ -5,10 +5,18 @@
     <string name="home_title">Home</string>
     <string name="details_title">Details</string>
     <string name="settings_title">Settings</string>
+    <string name="city_list_title">City List</string>
 
     <!-- Buttons -->
     <string name="details_button">Details</string>
     <string name="settings_button">Settings</string>
+    <string name="save_button">Save</string>
+    <string name="add_record_button">Add Record</string>
+    <string name="edit_button">Edit</string>
+
+    <!-- Hints -->
+    <string name="title_hint">Title</string>
+    <string name="description_hint">Description</string>
 
     <!-- Preferences -->
     <string name="localization_category_title">Languages and localization</string>
@@ -29,5 +37,12 @@
     <string name="theme_light">Light</string>
     <string name="theme_dark">Dark</string>
     <string name="theme_system">System</string>
+
+    <string name="city_name_hint">City Name</string>
+    <string name="country_hint">Country</string>
+    <string name="temperature_hint">Temperature</string>
+    <string name="weather_state_hint">Weather State</string>
+    <string name="delete_button">Delete</string>
+    <string name="search_hint">Search city...</string>
 
 </resources>

@@ -5,10 +5,18 @@
     <string name="home_title">Главная</string>
     <string name="details_title">Подробности</string>
     <string name="settings_title">Настройки</string>
+    <string name="city_list_title">Список городов</string>
 
     <!-- Buttons -->
     <string name="details_button">Подробности</string>
     <string name="settings_button">Настройки</string>
+    <string name="save_button">Сохранить</string>
+    <string name="add_record_button">Добавить запись</string>
+    <string name="edit_button">Изменить</string>
+
+    <!-- Hints -->
+    <string name="title_hint">Заголовок</string>
+    <string name="description_hint">Описание</string>
 
     <!-- Preferences -->
     <string name="localization_category_title">Языки и локализация</string>
@@ -30,4 +38,10 @@
     <string name="theme_dark">Тёмная</string>
     <string name="theme_system">Системная</string>
 
+    <string name="city_name_hint">Название города</string>
+    <string name="country_hint">Страна</string>
+    <string name="temperature_hint">Температура</string>
+    <string name="weather_state_hint">Состояние погоды</string>
+    <string name="delete_button">Удалить</string>
+    <string name="search_hint">Поиск города...</string>
 </resources>
