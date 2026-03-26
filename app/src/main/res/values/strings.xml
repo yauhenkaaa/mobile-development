@@ -6,12 +6,15 @@
     <string name="details_title">Details</string>
     <string name="settings_title">Settings</string>
     <string name="city_list_title">City List</string>
+    <string name="records_title">Records</string>
 
     <!-- Buttons -->
     <string name="details_button">Details</string>
     <string name="settings_button">Settings</string>
     <string name="save_button">Save</string>
     <string name="add_record_button">Add Record</string>
+    <string name="save_record_button">Save Record</string>
+    <string name="exit_button">Exit</string>
     <string name="edit_button">Edit</string>
     <string name="set_as_main_button">Set as Main</string>
 
@@ -27,6 +30,10 @@
     <string name="theme_category_title">Appearance</string>
     <string name="theme_preference_title">Color theme</string>
     <string name="theme_preference_dialog_title">Select theme</string>
+    <string name="storage_category_title">Storage</string>
+    <string name="clear_cache_title">Clear cache</string>
+    <string name="clear_cache_summary">Delete cached weather data</string>
+    <string name="clear_cache_confirm_message">Are you sure you want to clear weather cache?</string>
 
     <!-- Language entries -->
     <string name="language_russian">Russian</string>
@@ -46,5 +53,44 @@
     <string name="delete_button">Delete</string>
     <string name="search_hint">Search city...</string>
     <string name="no_main_city">No main city selected</string>
+    <string name="records_empty">No weather records yet</string>
+    <string name="no_cached_weather_for_record">No cached weather to add record</string>
+    <string name="record_time_hint">Time (dd.MM.yyyy HH:mm)</string>
+    <string name="invalid_time">Invalid time format</string>
+    <string name="record_saved">Record saved</string>
+
+    <!-- Network -->
+    <string name="no_internet">No Internet connection</string>
+    <string name="back_online">You are back online</string>
+    <string name="cannot_update_data">Unable to update data</string>
+
+    <!-- Cities (Keys must match belarusCities in WeatherRepository) -->
+    <string name="city_minsk">Minsk</string>
+    <string name="city_brest">Brest</string>
+    <string name="city_gomel">Gomel</string>
+    <string name="city_grodno">Grodno</string>
+    <string name="city_mogilev">Mogilev</string>
+    <string name="city_vitebsk">Vitebsk</string>
+    <string name="city_bobruisk">Bobruisk</string>
+    <string name="city_baranovichi">Baranovichi</string>
+    <string name="city_borisov">Borisov</string>
+    <string name="city_pinsk">Pinsk</string>
+    <string name="city_orsha">Orsha</string>
+    <string name="city_mozyr">Mozyr</string>
+    <string name="city_soligorsk">Soligorsk</string>
+    <string name="city_navapolatsk">Navapolatsk</string>
+    <string name="city_lida">Lida</string>
+    <string name="city_molodechno">Molodechno</string>
+
+    <!-- Weather States -->
+    <string name="weather_thunderstorm">Thunderstorm</string>
+    <string name="weather_drizzle">Drizzle</string>
+    <string name="weather_rain">Rain</string>
+    <string name="weather_snow">Snow</string>
+    <string name="weather_clear">Clear</string>
+    <string name="weather_clouds">Clouds</string>
+    <string name="weather_mist">Mist</string>
+    <string name="weather_fog">Fog</string>
+    <string name="weather_haze">Haze</string>
 
 </resources>

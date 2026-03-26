@@ -15,10 +15,16 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField(
+            "String",
+            "OPEN_WEATHER_API_KEY",
+            "\"${project.findProperty("OPEN_WEATHER_API_KEY") ?: ""}\""
+        )
     }
 
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 
     buildTypes {
@@ -49,6 +55,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -65,4 +72,6 @@ dependencies {
     implementation("androidx.room:room-runtime:2.8.4")
     implementation("androidx.room:room-ktx:2.8.4")
     ksp("androidx.room:room-compiler:2.8.4")
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
 }

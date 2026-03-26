@@ -1,4 +1,4 @@
-package com.example.myweather
+package com.example.myweather.ui.citylist
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myweather.R
 import com.example.myweather.data.City
 
 class CityAdapter(private val onItemClick: (City) -> Unit) :
@@ -27,8 +28,25 @@ class CityAdapter(private val onItemClick: (City) -> Unit) :
         private val tvTemp: TextView = itemView.findViewById(R.id.tv_temperature)
 
         fun bind(city: City) {
-            tvName.text = city.name
-            tvState.text = city.weatherState
+            val context = itemView.context
+
+            // Localize City Name
+            val cityResId = context.resources.getIdentifier(
+                "city_${city.name.lowercase()}",
+                "string",
+                context.packageName
+            )
+            tvName.text = if (cityResId != 0) context.getString(cityResId) else city.name
+
+            // Localize Weather State
+            val stateKey = city.weatherState.lowercase().replace(" ", "_")
+            val stateResId = context.resources.getIdentifier(
+                "weather_$stateKey",
+                "string",
+                context.packageName
+            )
+            tvState.text = if (stateResId != 0) context.getString(stateResId) else city.weatherState
+
             tvTemp.text = "${city.temperature}°C"
             itemView.setOnClickListener { onItemClick(city) }
         }

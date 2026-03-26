@@ -6,12 +6,15 @@
     <string name="details_title">Подробности</string>
     <string name="settings_title">Настройки</string>
     <string name="city_list_title">Список городов</string>
+    <string name="records_title">Записи</string>
 
     <!-- Buttons -->
     <string name="details_button">Подробности</string>
     <string name="settings_button">Настройки</string>
     <string name="save_button">Сохранить</string>
     <string name="add_record_button">Добавить запись</string>
+    <string name="save_record_button">Сохранить запись</string>
+    <string name="exit_button">Выйти</string>
     <string name="edit_button">Изменить</string>
     <string name="set_as_main_button">Сделать главным</string>
 
@@ -27,6 +30,10 @@
     <string name="theme_category_title">Оформление</string>
     <string name="theme_preference_title">Цветовая тема</string>
     <string name="theme_preference_dialog_title">Выберите тему</string>
+    <string name="storage_category_title">Хранилище</string>
+    <string name="clear_cache_title">Очистить кэш</string>
+    <string name="clear_cache_summary">Удалить сохраненные данные о погоде</string>
+    <string name="clear_cache_confirm_message">Очистить кэш погоды?</string>
 
     <!-- Language entries -->
     <string name="language_russian">Русский</string>
@@ -46,4 +53,44 @@
     <string name="delete_button">Удалить</string>
     <string name="search_hint">Поиск города...</string>
     <string name="no_main_city">Главный город не выбран</string>
+    <string name="records_empty">Записей пока нет</string>
+    <string name="no_cached_weather_for_record">Нет кэшированных данных для записи</string>
+    <string name="record_time_hint">Время (dd.MM.yyyy HH:mm)</string>
+    <string name="invalid_time">Неверный формат времени</string>
+    <string name="record_saved">Запись сохранена</string>
+
+    <!-- Network -->
+    <string name="no_internet">Отсутствует подключение к Интернету</string>
+    <string name="back_online">Вы снова в сети</string>
+    <string name="cannot_update_data">Невозможно обновить данные</string>
+
+    <!-- Cities -->
+    <string name="city_minsk">Минск</string>
+    <string name="city_brest">Брест</string>
+    <string name="city_gomel">Гомель</string>
+    <string name="city_grodno">Гродно</string>
+    <string name="city_mogilev">Могилев</string>
+    <string name="city_vitebsk">Витебск</string>
+    <string name="city_bobruisk">Бобруйск</string>
+    <string name="city_baranovichi">Барановичи</string>
+    <string name="city_borisov">Борисов</string>
+    <string name="city_pinsk">Пинск</string>
+    <string name="city_orsha">Орша</string>
+    <string name="city_mozyr">Мозырь</string>
+    <string name="city_soligorsk">Солигорск</string>
+    <string name="city_navapolatsk">Новополоцк</string>
+    <string name="city_lida">Лида</string>
+    <string name="city_molodechno">Молодечно</string>
+
+    <!-- Weather States -->
+    <string name="weather_thunderstorm">Гроза</string>
+    <string name="weather_drizzle">Морось</string>
+    <string name="weather_rain">Дождь</string>
+    <string name="weather_snow">Снег</string>
+    <string name="weather_clear">Ясно</string>
+    <string name="weather_clouds">Облачно</string>
+    <string name="weather_mist">Туман</string>
+    <string name="weather_fog">Густой туман</string>
+    <string name="weather_haze">Мгла</string>
+
 </resources>

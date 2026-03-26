@@ -16,4 +16,9 @@
         android:icon="@drawable/ic_settings"
         android:title="@string/settings_title" />
 
+    <item
+        android:id="@+id/recordsFragment"
+        android:icon="@drawable/ic_city_list"
+        android:title="@string/records_title" />
+
 </menu>

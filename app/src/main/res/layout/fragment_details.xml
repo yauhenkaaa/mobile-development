@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailsFragment">
+    tools:context=".ui.details.DetailsFragment">
 
     <TextView
         android:id="@+id/city_name_text"
@@ -46,111 +46,40 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/set_as_main_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/temperature_text"
         tools:text="Sunny" />
 
-    <LinearLayout
-        android:id="@+id/edit_layout"
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/set_as_main_button"
+        style="@style/Widget.Material3.Button.TonalButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp"
-        android:visibility="gone"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/city_name_hint">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edit_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textCapWords" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:hint="@string/country_hint">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edit_country"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textCapWords" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:hint="@string/temperature_hint">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edit_temperature"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="numberDecimal|numberSigned" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:hint="@string/weather_state_hint">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edit_weather_state"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textCapWords" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-    </LinearLayout>
+        android:layout_marginTop="24dp"
+        android:text="@string/set_as_main_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weather_state_text" />
 
     <Button
-        android:id="@+id/set_main_button"
+        android:id="@+id/exit_button"
         style="@style/Widget.Material3.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/set_as_main_button"
+        android:text="@string/exit_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/edit_button"
+        android:id="@+id/save_record_button"
         style="@style/Widget.Material3.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/edit_button"
-        app:layout_constraintEnd_toStartOf="@+id/delete_button"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/delete_button"
-        style="@style/Widget.Material3.Button.TextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/delete_button"
-        android:textColor="?attr/colorError"
+        android:text="@string/save_record_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/button_save"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="@string/save_button"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

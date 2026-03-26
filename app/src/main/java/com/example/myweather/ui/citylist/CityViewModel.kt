@@ -1,4 +1,4 @@
-package com.example.myweather
+package com.example.myweather.ui.citylist
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
@@ -36,6 +37,7 @@ class CityViewModel(private val dao: CityDao) : ViewModel() {
     fun updateCity(city: City) = viewModelScope.launch { dao.updateCity(city) }
     fun deleteCity(city: City) = viewModelScope.launch { dao.deleteCity(city) }
     suspend fun getCityById(id: Int): City? = dao.getCityById(id)
+    fun observeCityById(id: Int) = dao.observeCityById(id).filterNotNull()
 }
 
 class CityViewModelFactory(private val dao: CityDao) : ViewModelProvider.Factory {

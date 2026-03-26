@@ -7,18 +7,16 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.myweather.HomeFragment"
+        android:name="com.example.myweather.ui.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
 
-    <!-- ID должен совпадать с ID в bottom_nav_menu.xml -->
     <fragment
         android:id="@+id/cityListFragment"
-        android:name="com.example.myweather.CityListFragment"
+        android:name="com.example.myweather.ui.citylist.CityListFragment"
         android:label="fragment_city_list"
         tools:layout="@layout/fragment_city_list">
 
-        <!-- Экшен перехода на детали -->
         <action
             android:id="@+id/action_cityListFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
@@ -26,14 +24,20 @@
 
     <fragment
         android:id="@+id/detailsFragment"
-        android:name="com.example.myweather.DetailsFragment"
+        android:name="com.example.myweather.ui.details.DetailsFragment"
         android:label="fragment_details"
         tools:layout="@layout/fragment_details" />
 
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.myweather.SettingsFragment"
+        android:name="com.example.myweather.ui.settings.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
+
+    <fragment
+        android:id="@+id/recordsFragment"
+        android:name="com.example.myweather.ui.records.RecordsFragment"
+        android:label="fragment_records"
+        tools:layout="@layout/fragment_records" />
 
 </navigation>

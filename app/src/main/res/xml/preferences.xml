@@ -30,4 +30,14 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory
+        app:key="storage_category"
+        app:title="@string/storage_category_title">
+
+        <Preference
+            app:key="clear_cache"
+            app:title="@string/clear_cache_title"
+            app:summary="@string/clear_cache_summary" />
+    </PreferenceCategory>
+
 </PreferenceScreen>

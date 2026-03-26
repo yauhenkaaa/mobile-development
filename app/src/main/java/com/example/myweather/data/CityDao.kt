@@ -20,11 +20,26 @@ interface CityDao {
     @Query("SELECT * FROM cities WHERE id = :id")
     suspend fun getCityById(id: Int): City?
 
+    @Query("SELECT * FROM cities WHERE id = :id LIMIT 1")
+    fun observeCityById(id: Int): Flow<City?>
+
+    @Query("SELECT * FROM cities ORDER BY name ASC")
+    suspend fun getAllCitiesSnapshot(): List<City>
+
+    @Query("SELECT COUNT(*) FROM cities")
+    suspend fun getCitiesCount(): Int
+
     @Query("SELECT * FROM cities WHERE isMain = 1 LIMIT 1")
     fun getMainCity(): Flow<City?>
 
+    @Query("SELECT * FROM cities WHERE isMain = 1 LIMIT 1")
+    suspend fun getMainCitySnapshot(): City?
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCity(city: City)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertCities(cities: List<City>)
 
     @Update
     suspend fun updateCity(city: City)

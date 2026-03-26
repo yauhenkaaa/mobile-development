@@ -1,10 +1,9 @@
-package com.example.myweather
+package com.example.myweather.ui.citylist
 
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -13,7 +12,9 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.example.myweather.R
+import com.example.myweather.WeatherApp
+import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.launch
 
 class CityListFragment : Fragment(R.layout.fragment_city_list) {
@@ -26,11 +27,9 @@ class CityListFragment : Fragment(R.layout.fragment_city_list) {
         super.onViewCreated(view, savedInstanceState)
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view)
-        val searchBar = view.findViewById<EditText>(R.id.search_bar)
-        val fabAdd = view.findViewById<FloatingActionButton>(R.id.fab_add_city)
+        val searchBar = view.findViewById<TextInputEditText>(R.id.search_bar)
 
         val adapter = CityAdapter { city ->
-            // Переход на экран деталей с передачей ID через Bundle
             val bundle = Bundle().apply { putInt("cityId", city.id) }
             findNavController().navigate(R.id.action_cityListFragment_to_detailsFragment, bundle)
         }
@@ -54,10 +53,5 @@ class CityListFragment : Fragment(R.layout.fragment_city_list) {
             override fun afterTextChanged(s: Editable?) {}
         })
 
-        fabAdd.setOnClickListener {
-            // Передаем -1 для создания нового города
-            val bundle = Bundle().apply { putInt("cityId", -1) }
-            findNavController().navigate(R.id.action_cityListFragment_to_detailsFragment, bundle)
-        }
     }
 }

@@ -7,12 +7,15 @@
     <string name="details_title">Падрабязнасці</string>
     <string name="settings_title">Налады</string>
     <string name="city_list_title">Спіс гарадоў</string>
+    <string name="records_title">Запісы</string>
 
     <!-- Buttons -->
     <string name="details_button">Падрабязнасці</string>
     <string name="settings_button">Налады</string>
     <string name="save_button">Захаваць</string>
     <string name="add_record_button">Дадаць запіс</string>
+    <string name="save_record_button">Захаваць запіс</string>
+    <string name="exit_button">Выйсці</string>
     <string name="edit_button">Змяніць</string>
     <string name="set_as_main_button">Зрабіць галоўным</string>
 
@@ -25,9 +28,14 @@
     <string name="language_preference_title">Мова</string>
     <string name="language_preference_dialog_title">Выберыце мову</string>
 
+    <!-- Appearance -->
     <string name="theme_category_title">Знешні выгляд</string>
     <string name="theme_preference_title">Каляровая тэма</string>
     <string name="theme_preference_dialog_title">Выберыце тэму</string>
+    <string name="storage_category_title">Сховішча</string>
+    <string name="clear_cache_title">Ачысціць кэш</string>
+    <string name="clear_cache_summary">Выдаліць захаваныя дадзеныя пра надвор\'е</string>
+    <string name="clear_cache_confirm_message">Ачысціць кэш надвор\'я?</string>
 
     <!-- Language entries -->
     <string name="language_russian">Руская</string>
@@ -47,4 +55,44 @@
     <string name="delete_button">Выдаліць</string>
     <string name="search_hint">Пошук горада...</string>
     <string name="no_main_city">Галоўны горад не вызначаны</string>
+    <string name="records_empty">Запісаў пакуль няма</string>
+    <string name="no_cached_weather_for_record">Няма кэшаваных дадзеных для запісу</string>
+    <string name="record_time_hint">Час (dd.MM.yyyy HH:mm)</string>
+    <string name="invalid_time">Няправільны фармат часу</string>
+    <string name="record_saved">Запіс захаваны</string>
+
+    <!-- Network -->
+    <string name="no_internet">Няма далучэння да Інтэрнэту</string>
+    <string name="back_online">Вы зноў далучаны</string>
+    <string name="cannot_update_data">Немагчыма абнавіць дадзеныя</string>
+
+    <!-- Cities -->
+    <string name="city_minsk">Мінск</string>
+    <string name="city_brest">Брэст</string>
+    <string name="city_gomel">Гомель</string>
+    <string name="city_grodno">Гродна</string>
+    <string name="city_mogilev">Магілёў</string>
+    <string name="city_vitebsk">Віцебск</string>
+    <string name="city_bobruisk">Бабруйск</string>
+    <string name="city_baranovichi">Баранавічы</string>
+    <string name="city_borisov">Барысаў</string>
+    <string name="city_pinsk">Пінск</string>
+    <string name="city_orsha">Орша</string>
+    <string name="city_mozyr">Мазыр</string>
+    <string name="city_soligorsk">Салігорск</string>
+    <string name="city_navapolatsk">Наваполацк</string>
+    <string name="city_lida">Ліда</string>
+    <string name="city_molodechno">Маладзечна</string>
+
+    <!-- Weather States -->
+    <string name="weather_thunderstorm">Навальніца</string>
+    <string name="weather_drizzle">Мроя</string>
+    <string name="weather_rain">Дождж</string>
+    <string name="weather_snow">Снег</string>
+    <string name="weather_clear">Ясна</string>
+    <string name="weather_clouds">Воблачна</string>
+    <string name="weather_mist">Туман</string>
+    <string name="weather_fog">Густы туман</string>
+    <string name="weather_haze">Мгла</string>
+
 </resources>
