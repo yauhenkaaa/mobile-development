@@ -59,6 +59,20 @@
     <string name="invalid_time">Invalid time format</string>
     <string name="record_saved">Record saved</string>
 
+    <!-- Sorting and Filtering -->
+    <string name="sort_by_name">Name (A-Z)</string>
+    <string name="sort_by_name_desc">Name (Z-A)</string>
+    <string name="sort_by_temp_asc">Temperature (Low to High)</string>
+    <string name="sort_by_temp_desc">Temperature (High to Low)</string>
+    <string name="filter_all">All Weather</string>
+
+    <!-- Notifications -->
+    <string name="notification_channel_name">Weather Updates</string>
+    <string name="notification_good_morning">Good morning! The temperature in %1$s is %2$.1f degrees, weather state - %3$s</string>
+    <string name="notification_good_day">Good day! The temperature in %1$s is %2$.1f degrees, weather state - %3$s</string>
+    <string name="notification_good_evening">Good evening! The temperature in %1$s is %2$.1f degrees, weather state - %3$s</string>
+    <string name="notification_good_night">Good night! The temperature in %1$s is %2$.1f degrees, weather state - %3$s</string>
+
     <!-- Network -->
     <string name="no_internet">No Internet connection</string>
     <string name="back_online">You are back online</string>

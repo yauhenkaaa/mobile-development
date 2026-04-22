@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.widget.ImageButton
+import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -20,7 +22,8 @@ import kotlinx.coroutines.launch
 class CityListFragment : Fragment(R.layout.fragment_city_list) {
 
     private val viewModel: CityViewModel by viewModels {
-        CityViewModelFactory((requireActivity().application as WeatherApp).database.cityDao())
+        val app = requireActivity().application as WeatherApp
+        CityViewModelFactory(app, app.database.cityDao())
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -28,6 +31,7 @@ class CityListFragment : Fragment(R.layout.fragment_city_list) {
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view)
         val searchBar = view.findViewById<TextInputEditText>(R.id.search_bar)
+        val btnFilter = view.findViewById<ImageButton>(R.id.btn_filter)
 
         val adapter = CityAdapter { city ->
             val bundle = Bundle().apply { putInt("cityId", city.id) }
@@ -53,5 +57,38 @@ class CityListFragment : Fragment(R.layout.fragment_city_list) {
             override fun afterTextChanged(s: Editable?) {}
         })
 
+        btnFilter.setOnClickListener { showFilterPopUp(it) }
+    }
+
+    private fun showFilterPopUp(view: View) {
+        val popup = PopupMenu(requireContext(), view)
+        
+        // Sorting
+        popup.menu.add(0, 1, 0, R.string.sort_by_name)
+        popup.menu.add(0, 2, 1, R.string.sort_by_name_desc)
+        popup.menu.add(0, 3, 2, R.string.sort_by_temp_asc)
+        popup.menu.add(0, 4, 3, R.string.sort_by_temp_desc)
+        
+        // Filtering (Example states, ideally dynamic from DB)
+        val filterSub = popup.menu.addSubMenu(1, 0, 4, "Filter by Weather")
+        filterSub.add(1, 10, 0, R.string.filter_all)
+        filterSub.add(1, 11, 1, R.string.weather_clear)
+        filterSub.add(1, 12, 2, R.string.weather_clouds)
+        filterSub.add(1, 13, 3, R.string.weather_rain)
+
+        popup.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                1 -> viewModel.sortOrder.value = SortOrder.NAME_ASC
+                2 -> viewModel.sortOrder.value = SortOrder.NAME_DESC
+                3 -> viewModel.sortOrder.value = SortOrder.TEMP_ASC
+                4 -> viewModel.sortOrder.value = SortOrder.TEMP_DESC
+                10 -> viewModel.weatherFilter.value = null
+                11 -> viewModel.weatherFilter.value = "Clear"
+                12 -> viewModel.weatherFilter.value = "Clouds"
+                13 -> viewModel.weatherFilter.value = "Rain"
+            }
+            true
+        }
+        popup.show()
     }
 }

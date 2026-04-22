@@ -61,6 +61,20 @@
     <string name="invalid_time">Няправільны фармат часу</string>
     <string name="record_saved">Запіс захаваны</string>
 
+    <!-- Sorting and Filtering -->
+    <string name="sort_by_name">Назва (А-Я)</string>
+    <string name="sort_by_name_desc">Назва (Я-А)</string>
+    <string name="sort_by_temp_asc">Тэмпература (узр.)</string>
+    <string name="sort_by_temp_desc">Тэмпература (спад.)</string>
+    <string name="filter_all">Усё надвор\'е</string>
+
+    <!-- Notifications -->
+    <string name="notification_channel_name">Абнаўленні надвор\'я</string>
+    <string name="notification_good_morning">Добрай раніцы! Тэмпература ў горадзе %1$s складае %2$.1f градусаў, стан надвор\'я - %3$s</string>
+    <string name="notification_good_day">Добры дзень! Тэмпература ў горадзе %1$s складае %2$.1f градусаў, стан надвор\'я - %3$s</string>
+    <string name="notification_good_evening">Добры вечар! Тэмпература ў горадзе %1$s складае %2$.1f градусаў, стан надвор\'я - %3$s</string>
+    <string name="notification_good_night">Дабранач! Тэмпература ў горадзе %1$s складае %2$.1f градусаў, стан надвор\'я - %3$s</string>
+
     <!-- Network -->
     <string name="no_internet">Няма далучэння да Інтэрнэту</string>
     <string name="back_online">Вы зноў далучаны</string>
@@ -76,7 +90,7 @@
     <string name="city_bobruisk">Бабруйск</string>
     <string name="city_baranovichi">Баранавічы</string>
     <string name="city_borisov">Барысаў</string>
-    <string name="city_pinsk">Пінск</string>
+    <string name="city_pinsk">Пинск</string>
     <string name="city_orsha">Орша</string>
     <string name="city_mozyr">Мазыр</string>
     <string name="city_soligorsk">Салігорск</string>

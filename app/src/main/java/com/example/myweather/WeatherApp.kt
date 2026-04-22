@@ -6,6 +6,7 @@ import androidx.preference.PreferenceManager
 import com.example.myweather.data.AppDatabase
 import com.example.myweather.data.WeatherRepository
 import com.example.myweather.network.OpenWeatherApi
+import com.example.myweather.notifications.WeatherNotificationWorker
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -38,6 +39,7 @@ class WeatherApp : Application() {
     override fun onCreate() {
         super.onCreate()
         applyTheme()
+        WeatherNotificationWorker.scheduleNext(this)
     }
 
     private fun applyTheme() {

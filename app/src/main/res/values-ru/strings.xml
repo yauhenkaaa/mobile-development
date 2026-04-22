@@ -59,6 +59,20 @@
     <string name="invalid_time">Неверный формат времени</string>
     <string name="record_saved">Запись сохранена</string>
 
+    <!-- Sorting and Filtering -->
+    <string name="sort_by_name">Название (А-Я)</string>
+    <string name="sort_by_name_desc">Название (Я-А)</string>
+    <string name="sort_by_temp_asc">Температура (возр.)</string>
+    <string name="sort_by_temp_desc">Температура (убыв.)</string>
+    <string name="filter_all">Вся погода</string>
+
+    <!-- Notifications -->
+    <string name="notification_channel_name">Обновления погоды</string>
+    <string name="notification_good_morning">Доброе утро! Температура в городе %1$s составляет %2$.1f градусов, состояние погоды - %3$s</string>
+    <string name="notification_good_day">Добрый день! Температура в городе %1$s составляет %2$.1f градусов, состояние погоды - %3$s</string>
+    <string name="notification_good_evening">Добрый вечер! Температура в городе %1$s составляет %2$.1f градусов, состояние погоды - %3$s</string>
+    <string name="notification_good_night">Доброй ночи! Температура в городе %1$s составляет %2$.1f градусов, состояние погоды - %3$s</string>
+
     <!-- Network -->
     <string name="no_internet">Отсутствует подключение к Интернету</string>
     <string name="back_online">Вы снова в сети</string>
