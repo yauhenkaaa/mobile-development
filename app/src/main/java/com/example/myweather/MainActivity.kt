@@ -13,10 +13,12 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.myweather.utils.NetworkMonitor
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
@@ -26,6 +28,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var networkMonitor: NetworkMonitor
     private var statusJob: Job? = null
     private var firstState = true
+    private var auth: FirebaseAuth? = null
 
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
@@ -38,11 +41,36 @@ class MainActivity : AppCompatActivity() {
         installSplashScreen()
         setContentView(R.layout.activity_main)
 
+        // Try to initialize Firebase Auth safely
+        try {
+            auth = FirebaseAuth.getInstance()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
         checkNotificationPermission()
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
-        findViewById<BottomNavigationView>(R.id.bottom_nav).setupWithNavController(navController)
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav)
+        bottomNav.setupWithNavController(navController)
+
+        // Safe Navigation and UI management
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                if (auth?.currentUser == null) {
+                    navController.navigate(R.id.loginFragment)
+                }
+            }
+        }
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if (destination.id == R.id.loginFragment || destination.id == R.id.registerFragment) {
+                bottomNav.visibility = View.GONE
+            } else {
+                bottomNav.visibility = View.VISIBLE
+            }
+        }
 
         val networkStatusBar = findViewById<TextView>(R.id.network_status_bar)
         networkMonitor = NetworkMonitor(this)

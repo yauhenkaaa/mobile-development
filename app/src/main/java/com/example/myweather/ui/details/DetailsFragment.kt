@@ -1,8 +1,10 @@
 package com.example.myweather.ui.details
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -37,6 +39,7 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
         val exitButton = view.findViewById<Button>(R.id.exit_button)
         val saveRecordButton = view.findViewById<Button>(R.id.save_record_button)
         val setAsMainButton = view.findViewById<Button>(R.id.set_as_main_button)
+        val btnShare = view.findViewById<ImageButton>(R.id.btn_share)
 
         val cityId = arguments?.getInt("cityId") ?: -1
         if (cityId == -1) {
@@ -106,6 +109,81 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
                     )
                 }
             }
+        }
+
+        btnShare.setOnClickListener {
+            currentCity?.let { shareWeather(it) }
+        }
+    }
+
+    private fun shareWeather(city: City) {
+        val context = requireContext()
+        
+        // Localized City Name
+        val cityResId = context.resources.getIdentifier(
+            "city_${city.name.lowercase()}",
+            "string",
+            context.packageName
+        )
+        val cityName = if (cityResId != 0) getString(cityResId) else city.name
+
+        // Localized Weather State
+        val rawState = city.weatherState.lowercase()
+        val stateKey = rawState.replace(" ", "_")
+        val stateResId = context.resources.getIdentifier(
+            "weather_$stateKey",
+            "string",
+            context.packageName
+        )
+        val weatherStateText = if (stateResId != 0) getString(stateResId) else city.weatherState
+
+        // Emoji mapping
+        val emoji = when {
+            rawState.contains("thunderstorm") -> "⛈️"
+            rawState.contains("drizzle") -> "🌦️"
+            rawState.contains("rain") -> "🌧️"
+            rawState.contains("snow") -> "❄️"
+            rawState.contains("clear") -> "☀️"
+            rawState.contains("cloud") -> "☁️"
+            rawState.contains("mist") || rawState.contains("fog") || rawState.contains("haze") -> "🌫️"
+            else -> "✨"
+        }
+
+        // Weather advice selection
+        val adviceResId = when {
+            rawState.contains("thunderstorm") -> R.string.weather_advice_thunderstorm
+            rawState.contains("rain") || rawState.contains("drizzle") -> R.string.weather_advice_rain
+            rawState.contains("snow") -> R.string.weather_advice_snow
+            rawState.contains("clear") -> R.string.weather_advice_clear
+            rawState.contains("cloud") -> R.string.weather_advice_clouds
+            else -> R.string.weather_advice_default
+        }
+        val adviceText = getString(adviceResId)
+
+        val shareText = getString(
+            R.string.share_weather_template,
+            cityName,
+            city.temperature,
+            weatherStateText,
+            emoji,
+            adviceText
+        )
+
+        val shareIntent = Intent(Intent.ACTION_SEND).apply {
+            type = "text/plain"
+            putExtra(Intent.EXTRA_TEXT, shareText)
+        }
+
+        val telegramIntent = Intent(Intent.ACTION_SEND).apply {
+            type = "text/plain"
+            putExtra(Intent.EXTRA_TEXT, shareText)
+            setPackage("org.telegram.messenger")
+        }
+
+        try {
+            startActivity(telegramIntent)
+        } catch (e: Exception) {
+            startActivity(Intent.createChooser(shareIntent, null))
         }
     }
 

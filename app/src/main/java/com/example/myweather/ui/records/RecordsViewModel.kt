@@ -4,13 +4,21 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import com.example.myweather.data.WeatherRepository
+import kotlinx.coroutines.launch
 
 class RecordsViewModel(
     app: Application,
     private val repository: WeatherRepository
 ) : AndroidViewModel(app) {
     val records = repository.records
+
+    init {
+        viewModelScope.launch {
+            repository.startRealtimeSync()
+        }
+    }
 }
 
 class RecordsViewModelFactory(
@@ -22,4 +30,3 @@ class RecordsViewModelFactory(
         return RecordsViewModel(application, repository) as T
     }
 }
-

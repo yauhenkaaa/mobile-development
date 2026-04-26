@@ -26,8 +26,6 @@ class WeatherNotificationWorker(
 
         sendNotification(applicationContext, mainCity.name, mainCity.temperature, mainCity.weatherState)
 
-        // Only reschedule if it's not a manual trigger (or always reschedule if we want to keep the cycle)
-        // If tag contains MANUAL, we might not want to schedule next, but the requirement is "on manual update" as a test.
         if (!tags.contains(MANUAL_TAG)) {
             scheduleNext(applicationContext)
         }

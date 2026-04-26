@@ -107,4 +107,33 @@
     <string name="weather_fog">Fog</string>
     <string name="weather_haze">Haze</string>
 
+    <!-- Location -->
+    <string name="location_permission_denied">Location permission denied</string>
+    <string name="location_not_available">Location is not available. Check if GPS is enabled.</string>
+
+    <!-- Sharing -->
+    <string name="share_weather_template">Current weather in %1$s: The temperature is %2$.1f°C. Currently it is %3$s %4$s. %5$s</string>
+    <string name="weather_advice_clear">The sky is clear, perfect for a walk!</string>
+    <string name="weather_advice_rain">It\'s raining, don\'t forget your umbrella!</string>
+    <string name="weather_advice_snow">It\'s snowing! Wear warm clothes.</string>
+    <string name="weather_advice_clouds">It\'s a bit cloudy today.</string>
+    <string name="weather_advice_thunderstorm">Thunderstorm warning! Stay safe indoors.</string>
+    <string name="weather_advice_default">Have a nice day regardless of the weather!</string>
+
+    <!-- Auth -->
+    <string name="login_title">Login</string>
+    <string name="register_title">Registration</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="login_button">Login</string>
+    <string name="register_button">Register</string>
+    <string name="go_to_register">Don\'t have an account? Register</string>
+    <string name="go_to_login">Already have an account? Login</string>
+    <string name="error_weak_password">Password is too weak</string>
+    <string name="error_invalid_email">Invalid email address</string>
+    <string name="error_email_already_in_use">This email is already registered</string>
+    <string name="error_invalid_credentials">Invalid email or password</string>
+    <string name="error_unknown">An unexpected error occurred</string>
+    <string name="error_empty_fields">Email and password cannot be empty</string>
+
 </resources>

@@ -2,11 +2,18 @@ package com.example.myweather.data
 
 import android.util.Log
 import com.example.myweather.network.OpenWeatherApi
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 import java.util.Locale
 
 class WeatherRepository(
@@ -17,6 +24,7 @@ class WeatherRepository(
     private val apiKey: String
 ) {
     private val firestore = FirebaseFirestore.getInstance()
+    private val auth = FirebaseAuth.getInstance()
     
     private val belarusCities = listOf(
         "Minsk", "Brest", "Gomel", "Grodno", "Mogilev", "Vitebsk",
@@ -27,6 +35,26 @@ class WeatherRepository(
     val errors: SharedFlow<Int> = _errors
     val cachedWeather: Flow<CachedWeather?> = cachedWeatherDao.observeCachedWeather()
     val records: Flow<List<WeatherRecord>> = weatherRecordDao.observeRecords()
+
+    // Auth methods
+    suspend fun login(email: String, password: String) {
+        auth.signInWithEmailAndPassword(email, password).await()
+        migrateLocalRecords()
+    }
+
+    suspend fun register(email: String, password: String) {
+        auth.createUserWithEmailAndPassword(email, password).await()
+        migrateLocalRecords()
+    }
+
+    fun logout() {
+        auth.signOut()
+    }
+
+    suspend fun migrateLocalRecords() {
+        val uid = auth.currentUser?.uid ?: return
+        weatherRecordDao.updateEmptyUserIds(uid)
+    }
 
     suspend fun ensureDefaultCities() {
         val allCities = cityDao.getAllCitiesSnapshot()
@@ -99,6 +127,27 @@ class WeatherRepository(
         return successCount > 0
     }
 
+    suspend fun refreshMainCityByCoords(lat: Double, lon: Double, lang: String = Locale.getDefault().language) {
+        try {
+            val response = openWeatherApi.getWeatherByCoords(lat, lon, apiKey, lang = lang)
+            val cityName = response.name
+            
+            cachedWeatherDao.upsertCachedWeather(
+                CachedWeather(
+                    cityId = -1,
+                    cityName = cityName,
+                    country = response.sys.country,
+                    temperature = response.main.temp,
+                    weatherState = response.weather.firstOrNull()?.main.orEmpty(),
+                    updatedAt = System.currentTimeMillis()
+                )
+            )
+        } catch (e: Exception) {
+            Log.e("WeatherRepository", "Error refreshing weather by coords", e)
+            _errors.emit(com.example.myweather.R.string.cannot_update_data)
+        }
+    }
+
     private suspend fun updateCacheForMainCity() {
         val city = cityDao.getMainCitySnapshot() ?: return
         cachedWeatherDao.upsertCachedWeather(
@@ -130,8 +179,10 @@ class WeatherRepository(
     }
 
     suspend fun addRecord(record: WeatherRecord) {
-        val localId = weatherRecordDao.insertRecord(record).toInt()
-        val recordWithId = record.copy(id = localId)
+        val uid = auth.currentUser?.uid ?: ""
+        val recordWithUser = record.copy(userId = uid)
+        val localId = weatherRecordDao.insertRecord(recordWithUser).toInt()
+        val recordWithId = recordWithUser.copy(id = localId)
         uploadRecordToFirestore(recordWithId)
     }
 
@@ -140,11 +191,55 @@ class WeatherRepository(
             val docRef = firestore.collection("weather_records").document()
             val recordToUpload = record.copy(firestoreId = docRef.id)
             docRef.set(recordToUpload).await()
-            // Update local record with firestore ID
             weatherRecordDao.updateRecord(recordToUpload)
             Log.d("WeatherRepository", "Record uploaded to Firestore with ID: ${docRef.id}")
         } catch (e: Exception) {
             Log.e("WeatherRepository", "Error uploading record to Firestore", e)
+        }
+    }
+
+    fun observeRemoteRecords(): Flow<List<WeatherRecord>> = callbackFlow {
+        val uid = auth.currentUser?.uid ?: ""
+        if (uid.isEmpty()) {
+            trySend(emptyList())
+            awaitClose { }
+            return@callbackFlow
+        }
+
+        val subscription = firestore.collection("weather_records")
+            .whereEqualTo("userId", uid)
+            .orderBy("recordedAt", Query.Direction.DESCENDING)
+            .addSnapshotListener { snapshot, error ->
+                if (error != null) {
+                    Log.e("WeatherRepository", "SnapshotListener error", error)
+                    return@addSnapshotListener
+                }
+                if (snapshot != null) {
+                    val remoteRecords = snapshot.documents.mapNotNull { doc ->
+                        doc.toObject(WeatherRecord::class.java)?.copy(firestoreId = doc.id)
+                    }
+                    trySend(remoteRecords)
+                }
+            }
+        awaitClose { subscription.remove() }
+    }.flowOn(Dispatchers.IO)
+
+    suspend fun startRealtimeSync() {
+        withContext(Dispatchers.IO) {
+            observeRemoteRecords().collect { remoteRecords ->
+                remoteRecords.forEach { remote ->
+                    remote.firestoreId?.let { fid ->
+                        var local = weatherRecordDao.getRecordByFirestoreId(fid)
+                        if (local == null) {
+                            local = weatherRecordDao.getRecordByData(remote.cityName, remote.recordedAt)
+                        }
+
+                        if (local == null || remote.recordedAt > local.recordedAt) {
+                            weatherRecordDao.insertRecord(remote.copy(id = local?.id ?: 0))
+                        }
+                    }
+                }
+            }
         }
     }
 }

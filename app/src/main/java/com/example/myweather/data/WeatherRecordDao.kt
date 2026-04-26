@@ -17,4 +17,13 @@ interface WeatherRecordDao {
 
     @Update
     suspend fun updateRecord(record: WeatherRecord)
+
+    @Query("SELECT * FROM weather_records WHERE firestoreId = :firestoreId LIMIT 1")
+    suspend fun getRecordByFirestoreId(firestoreId: String): WeatherRecord?
+
+    @Query("SELECT * FROM weather_records WHERE cityName = :cityName AND recordedAt = :recordedAt LIMIT 1")
+    suspend fun getRecordByData(cityName: String, recordedAt: Long): WeatherRecord?
+
+    @Query("UPDATE weather_records SET userId = :userId WHERE userId = '' OR userId IS NULL")
+    suspend fun updateEmptyUserIds(userId: String)
 }

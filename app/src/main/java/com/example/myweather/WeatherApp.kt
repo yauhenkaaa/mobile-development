@@ -1,6 +1,7 @@
 package com.example.myweather
 
 import android.app.Application
+import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceManager
 import com.example.myweather.data.AppDatabase
@@ -10,6 +11,7 @@ import com.example.myweather.notifications.WeatherNotificationWorker
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -39,7 +41,15 @@ class WeatherApp : Application() {
     override fun onCreate() {
         super.onCreate()
         applyTheme()
-        WeatherNotificationWorker.scheduleNext(this)
+        
+        // Schedule notification work safely in a background scope
+        applicationScope.launch {
+            try {
+                WeatherNotificationWorker.scheduleNext(this@WeatherApp)
+            } catch (e: Exception) {
+                Log.e("WeatherApp", "Failed to schedule notifications", e)
+            }
+        }
     }
 
     private fun applyTheme() {

@@ -107,4 +107,13 @@
     <string name="weather_fog">Густой туман</string>
     <string name="weather_haze">Мгла</string>
 
+    <!-- Sharing -->
+    <string name="share_weather_template">Текущая погода в г. %1$s: Температура %2$.1f°C. Сейчас там %3$s %4$s. %5$s</string>
+    <string name="weather_advice_clear">Небо ясное, отличная погода для прогулки!</string>
+    <string name="weather_advice_rain">Идет дождь, не забудьте взять зонт!</string>
+    <string name="weather_advice_snow">Идет снег! Одевайтесь теплее.</string>
+    <string name="weather_advice_clouds">Сегодня немного облачно.</string>
+    <string name="weather_advice_thunderstorm">Внимание, гроза! Оставайтесь в безопасности дома.</string>
+    <string name="weather_advice_default">Хорошего дня при любой погоде!</string>
+
 </resources>

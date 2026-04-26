@@ -13,6 +13,8 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
@@ -31,6 +33,9 @@ class WeatherViewModel(
     val isRefreshing: Flow<Boolean> get() = _isRefreshing
 
     private val _isRefreshing = MutableStateFlow(false)
+    
+    private val _isLocationLoading = MutableStateFlow(false)
+    val isLocationLoading: StateFlow<Boolean> = _isLocationLoading.asStateFlow()
 
     private var tickerJob: Job? = null
 
@@ -67,6 +72,17 @@ class WeatherViewModel(
                 }
             } finally {
                 _isRefreshing.value = false
+            }
+        }
+    }
+
+    fun updateWeatherByLocation(lat: Double, lon: Double) {
+        viewModelScope.launch {
+            _isLocationLoading.value = true
+            try {
+                repository.refreshMainCityByCoords(lat, lon)
+            } finally {
+                _isLocationLoading.value = false
             }
         }
     }

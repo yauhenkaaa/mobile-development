@@ -7,9 +7,10 @@ import androidx.room.PrimaryKey
 data class WeatherRecord(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val firestoreId: String? = null,
-    val cityName: String,
-    val country: String,
-    val temperature: Double,
-    val weatherState: String,
-    val recordedAt: Long
+    val userId: String = "",
+    val cityName: String = "",
+    val country: String = "",
+    val temperature: Double = 0.0,
+    val weatherState: String = "",
+    val recordedAt: Long = 0L
 )

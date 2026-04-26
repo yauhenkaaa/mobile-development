@@ -30,7 +30,9 @@ class CityAdapter(private val onItemClick: (City) -> Unit) :
         private val tvTemp: TextView = itemView.findViewById(R.id.tv_temperature)
         private val ivIcon: ImageView = itemView.findViewById(R.id.iv_weather_icon)
 
-        private val IMAGEKIT_BASE_URL = "https://ik.imagekit.io/myweather_id/icons/"
+        private val IMAGEKIT_ID = "1qqfgqk0w"
+        private val BASE_URL = "https://ik.imagekit.io/$IMAGEKIT_ID/"
+        private val TRANSFORMATION = "tr:w-200,h-200"
 
         fun bind(city: City) {
             val context = itemView.context
@@ -44,7 +46,8 @@ class CityAdapter(private val onItemClick: (City) -> Unit) :
             tvName.text = if (cityResId != 0) context.getString(cityResId) else city.name
 
             // Localize Weather State
-            val stateKey = city.weatherState.lowercase().replace(" ", "_")
+            val rawState = city.weatherState.lowercase()
+            val stateKey = rawState.replace(" ", "_")
             val stateResId = context.resources.getIdentifier(
                 "weather_$stateKey",
                 "string",
@@ -54,12 +57,21 @@ class CityAdapter(private val onItemClick: (City) -> Unit) :
 
             tvTemp.text = "${city.temperature}°C"
 
-            // Load Icon from ImageKit via Coil
-            val iconFileName = "${stateKey}.png"
-            ivIcon.load(IMAGEKIT_BASE_URL + iconFileName) {
+            // Mapping to specific icon names
+            val iconName = when {
+                rawState.contains("thunderstorm") -> "thunderstorm"
+                rawState.contains("rain") || rawState.contains("drizzle") -> "rain"
+                rawState.contains("clear") -> "clear"
+                else -> "clouds"
+            }
+
+            // Correct ImageKit URL format: BASE_URL + TRANSFORMATION + PATH_TO_IMAGE
+            val iconUrl = "${BASE_URL}${TRANSFORMATION}/icons/${iconName}.png"
+
+            ivIcon.load(iconUrl) {
                 crossfade(true)
                 placeholder(R.drawable.myweather_logo)
-                error(R.drawable.myweather_logo) // Using existing logo as placeholder/error
+                error(R.drawable.myweather_logo)
             }
 
             itemView.setOnClickListener { onItemClick(city) }
