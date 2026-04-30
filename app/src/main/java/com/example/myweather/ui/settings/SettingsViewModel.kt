@@ -17,11 +17,17 @@ class SettingsViewModel(
 
     private val networkMonitor = NetworkMonitor(app.applicationContext)
 
+    val currentUserEmail: String? get() = repository.currentUserEmail
+
     fun clearCache() {
         viewModelScope.launch {
             val isConnected = networkMonitor.isConnected.first()
             repository.clearCacheAndRefresh(isConnected)
         }
+    }
+
+    fun logout() {
+        repository.logout()
     }
 }
 
@@ -34,4 +40,3 @@ class SettingsViewModelFactory(
         return SettingsViewModel(application, repository) as T
     }
 }
-

@@ -1,6 +1,8 @@
 package com.example.myweather.data
 
+import android.content.Context
 import android.util.Log
+import androidx.preference.PreferenceManager
 import com.example.myweather.network.OpenWeatherApi
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -17,6 +19,7 @@ import kotlinx.coroutines.withContext
 import java.util.Locale
 
 class WeatherRepository(
+    private val context: Context,
     private val cityDao: CityDao,
     private val cachedWeatherDao: CachedWeatherDao,
     private val weatherRecordDao: WeatherRecordDao,
@@ -25,7 +28,13 @@ class WeatherRepository(
 ) {
     private val firestore = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
-    
+    private val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context)
+
+    companion object {
+        private const val SESSION_DURATION = 3600000L // 1 hour
+        private const val KEY_LAST_LOGIN_TIME = "last_login_time"
+    }
+
     private val belarusCities = listOf(
         "Minsk", "Brest", "Gomel", "Grodno", "Mogilev", "Vitebsk",
         "Bobruisk", "Baranovichi", "Borisov", "Pinsk", "Orsha", "Mozyr",
@@ -36,19 +45,34 @@ class WeatherRepository(
     val cachedWeather: Flow<CachedWeather?> = cachedWeatherDao.observeCachedWeather()
     val records: Flow<List<WeatherRecord>> = weatherRecordDao.observeRecords()
 
+    val currentUserEmail: String? get() = auth.currentUser?.email
+
+    fun isSessionExpired(): Boolean {
+        if (auth.currentUser == null) return false
+        val lastLoginTime = sharedPrefs.getLong(KEY_LAST_LOGIN_TIME, 0L)
+        return (System.currentTimeMillis() - lastLoginTime) > SESSION_DURATION
+    }
+
+    private fun updateLoginTime() {
+        sharedPrefs.edit().putLong(KEY_LAST_LOGIN_TIME, System.currentTimeMillis()).apply()
+    }
+
     // Auth methods
     suspend fun login(email: String, password: String) {
         auth.signInWithEmailAndPassword(email, password).await()
+        updateLoginTime()
         migrateLocalRecords()
     }
 
     suspend fun register(email: String, password: String) {
         auth.createUserWithEmailAndPassword(email, password).await()
+        updateLoginTime()
         migrateLocalRecords()
     }
 
     fun logout() {
         auth.signOut()
+        sharedPrefs.edit().remove(KEY_LAST_LOGIN_TIME).apply()
     }
 
     suspend fun migrateLocalRecords() {

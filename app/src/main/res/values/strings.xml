@@ -35,6 +35,10 @@
     <string name="clear_cache_summary">Delete cached weather data</string>
     <string name="clear_cache_confirm_message">Are you sure you want to clear weather cache?</string>
 
+    <!-- Account -->
+    <string name="account_category_title">Account</string>
+    <string name="logout_button_text">Logout</string>
+
     <!-- Language entries -->
     <string name="language_russian">Russian</string>
     <string name="language_english">English</string>

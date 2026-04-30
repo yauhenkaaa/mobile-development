@@ -30,6 +30,7 @@ class WeatherApp : Application() {
 
     val weatherRepository: WeatherRepository by lazy {
         WeatherRepository(
+            context = this,
             cityDao = database.cityDao(),
             cachedWeatherDao = database.cachedWeatherDao(),
             weatherRecordDao = database.weatherRecordDao(),

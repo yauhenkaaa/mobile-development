@@ -16,6 +16,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.navOptions
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import coil.load
 import com.example.myweather.R
@@ -42,6 +44,21 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             fetchLocation()
         } else {
             Toast.makeText(requireContext(), R.string.location_permission_denied, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val app = requireActivity().application as WeatherApp
+        if (app.weatherRepository.isSessionExpired()) {
+            app.weatherRepository.logout()
+            findNavController().navigate(
+                R.id.loginFragment,
+                null,
+                navOptions {
+                    popUpTo(R.id.nav_graph) { inclusive = true }
+                }
+            )
         }
     }
 

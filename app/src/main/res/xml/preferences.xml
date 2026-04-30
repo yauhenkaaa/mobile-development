@@ -1,6 +1,21 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory
+        app:key="account_category"
+        app:title="@string/account_category_title">
+
+        <Preference
+            app:key="pref_user_email"
+            app:title="@string/email_hint"
+            app:selectable="false" />
+
+        <Preference
+            app:key="pref_logout"
+            app:title="@string/logout_button_text" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
         app:key="localization_category"
         app:title="@string/localization_category_title">
 
